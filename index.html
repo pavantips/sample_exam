@@ -327,10 +327,6 @@
 
     <div id="questionsContainer"></div>
 
-    <div class="warn-msg" id="warnMsg">
-      ⚠️ Please answer all questions before submitting.
-    </div>
-
     <div class="submit-banner">
       <p>Answered: <span id="answeredCount">0</span> of <span id="totalCount">10</span></p>
       <button class="btn btn-primary" id="submitBtn" onclick="submitExam()">Submit exam</button>
@@ -355,9 +351,10 @@
     </div>
 
     <div class="custom-box">
-      <strong>📌 What happens next</strong>
+      <strong>What happens next</strong>
       Your official exam results and next steps will be communicated by your testing administrator. If you have questions, contact <a href="mailto:support@meazure.com">support@meazure.com</a>.<br><br>
-      This practice exam is provided to help you get comfortable with the testing interface. Good luck on your official exam!
+      This practice exam is provided to help you get comfortable with the testing interface. Good luck on your official exam!<br><br>
+      You can now close this browser by clicking the X on the top right corner. We encourage you to take a brief survey as you close out which is totally optional but helps to better our services. Thank you.
     </div>
 
     <button class="btn btn-outline" onclick="retakeExam()">Retake practice exam</button>
@@ -478,13 +475,6 @@ function updateProgress() {
 
 function submitExam() {
   const answers = getAnswers();
-  const unanswered = answers.filter(a => a === null).length;
-  if (unanswered > 0) {
-    document.getElementById('warnMsg').classList.add('show');
-    const firstNull = answers.indexOf(null);
-    document.getElementById('q'+firstNull).scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
   clearInterval(timerInterval);
   const correct = answers.filter((a, i) => a === QUESTIONS[i].correct).length;
   const scorePct = Math.round((correct / QUESTIONS.length) * 100);
